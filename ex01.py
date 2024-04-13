@@ -1,4 +1,15 @@
-#def menu?
+def main_funct():
+    print("ДОБРО ПОЖАЛОВАТЬ В ТЕЛ СПРАВОЧНИК!")
+    menu = 1
+    while menu != 0:
+        print("ВЫБЕРИТЕ КОМАНДУ:\n 0 -- ЗАКОНЧИТЬ РАБОТУ\n 1 -- СОЗДАТЬ НОВЫЙ КОНТАКТ\n 2 -- НАЙТИ КОНТАКТ")
+        menu = int(input())
+        if menu == 1:
+            write_contact(read_line())
+        elif menu == 2:
+            return
+    return "Bye"
+
 
 def write_contact( contact ):
     """Функция принимает словарь и записывает его в файл
@@ -6,12 +17,13 @@ def write_contact( contact ):
     _string = str(contact)
     print(_string)
             
-    with open('data.txt', 'a') as f:
+    with open('data.txt', 'a', encoding="utf-8") as f:
         f.write(_string+"\n")
                 
-def read_line( ):
+def read_line():
     """Функция принимает контакт от пользователя
     и формирует его в словарь"""
+    print("Введите данные: ")
     _fir_n = input('Имя:')
     _sec_n = input('Фамилия:')
     _fam_n = input("Отчество:")
@@ -35,4 +47,4 @@ def find_data( income_data, key ):
     поисковым запросом"""
     return NULL
 
-write_contact(read_line())
+print(main_funct())
