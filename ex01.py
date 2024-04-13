@@ -7,14 +7,23 @@ def main_funct():
         if menu == 1:
             write_contact(read_line())
         elif menu == 2:
-            return
+            key = 0
+            while key != 5: 
+                print("Критерий поиска?:\n 5 - назад\n 0 - Имя\n 1 - Фамилия\n 2 - Отчество\n 3 - Телефон)\n 4 - Все")
+                key = int(input())
+                if key == 4:
+                    print("Имя Фамилия Отчество Телефон")
+                    print(read_data('data.txt'))
+                elif key in [1, 2, 3, 0]:
+                    print("Имя Фамилия Отчество Телефон")
+                    print(find_data(read_data('data.txt'), key))
     return "Bye"
 
 
 def write_contact( contact ):
     """Функция принимает словарь и записывает его в файл
     data.txt"""
-    _string = str(contact)
+    _string = ' '.join(contact)
     print(_string)
             
     with open('data.txt', 'a', encoding="utf-8") as f:
@@ -28,23 +37,20 @@ def read_line():
     _sec_n = input('Фамилия:')
     _fam_n = input("Отчество:")
     _phone = input("Номер телефона:")
-    contact = {"Имя" : _fir_n, "Фамилия": _sec_n, "Отчество" : _fam_n ,"Номер телефона" : _phone }
+    contact = [_fir_n, _sec_n, _fam_n ,_phone ]
     return contact
 
 def read_data( file ):
     """Функция читает принятый файл и возвращает
     контакты списком словарей
     """
-    return NULL
+    with open(file , 'r', encoding="utf-8") as f:
+        _file_str = f.read()
+        return _file_str
 
-def print_data( data ):
-    """Ф-я принимает список словарей контактов и выодит
-    в консоль"""
-    return NULL
 
-def find_data( income_data, key ):
+def find_data( income_data , key):
     """Ф-я принимает базу контактов и изменят её
     поисковым запросом"""
-    return NULL
-
+    
 print(main_funct())
