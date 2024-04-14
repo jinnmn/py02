@@ -9,23 +9,24 @@ def main_funct():
         elif menu == 2:
             key = 0
             while key != 5: 
-                print("Критерий поиска?:\n 5 - назад\n 0 - Имя\n 1 - Фамилия\n 2 - Отчество\n 3 - Телефон)\n 4 - Все")
+                print("Критерий поиска?:\n 5 - назад\n 0 - Имя\n 1 - Фамилия\n 2 - Отчество\n 3 - Телефон\n 4 - Все")
                 key = int(input())
                 if key == 4:
-                    print("Имя Фамилия Отчество Телефон")
+                    print("Имя\tФамилия\tОтчест\tТелефон")
                     print(read_data('data.txt'))
                 elif key in [1, 2, 3, 0]:
-                    print("Имя Фамилия Отчество Телефон")
-                    print(find_data(read_data('data.txt'), key))
+                    print(list_data(read_data('data.txt')))
+                    data = list_data(read_data('data.txt'))
+                    _keys = {0 : "Имя", 1:'Фамилия',2:'Отчество',3:"Номер телефона:"}
+                    print(_keys[key])
+                    find_data(data, key)
     return "Bye"
 
 
 def write_contact( contact ):
     """Функция принимает словарь и записывает его в файл
     data.txt"""
-    _string = ' '.join(contact)
-    print(_string)
-            
+    _string = '\t'.join(contact)    
     with open('data.txt', 'a', encoding="utf-8") as f:
         f.write(_string+"\n")
                 
@@ -40,6 +41,15 @@ def read_line():
     contact = [_fir_n, _sec_n, _fam_n ,_phone ]
     return contact
 
+def find_data( in_data , k):
+    """Ф-я принимает базу контактов и изменят её
+    поисковым запросом"""
+    out_data = []
+    for i in in_data:
+        out_data.append(i[k])
+        print(i[k])
+    return out_data
+
 def read_data( file ):
     """Функция читает принятый файл и возвращает
     контакты списком словарей
@@ -49,8 +59,24 @@ def read_data( file ):
         return _file_str
 
 
-def find_data( income_data , key):
+def list_data( income_data ):
     """Ф-я принимает базу контактов и изменят её
     поисковым запросом"""
+    _data = list(income_data.split())
+    _data[0] = _data[0][1:]
+    count = 0
+    new_data = []
+    _string = []
+    for i in _data:
+        _string.append(i)
+        count+=1
+        if count == 4:
+           count = 0
+           new_data.append(_string)
+           _string = []
+    # list new_data
+        
+    return new_data
+        
     
 print(main_funct())
