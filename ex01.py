@@ -28,7 +28,8 @@ def main_funct():
                             print('\t'.join(data[i]))
                                                            
     return "Bye"
-
+def merge_contact():
+    return
 
 def write_contact( contact ):
     """Функция принимает словарь и записывает его в файл
@@ -70,7 +71,7 @@ def list_data( income_data ):
     """Ф-я принимает базу контактов и изменят её
     поисковым запросом"""
     _data = list(income_data.split())
-    _data[0] = _data[0][1:]
+    _data[0] = _data[0][1:]         # отрезаем служебный символ в начале файла(толи из-за utf-8 толи ещё почему)
     count = 0
     new_data = []
     _string = []
