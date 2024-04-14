@@ -15,11 +15,18 @@ def main_funct():
                     print("Имя\tФамилия\tОтчест\tТелефон")
                     print(read_data('data.txt'))
                 elif key in [1, 2, 3, 0]:
-                    print(list_data(read_data('data.txt')))
+                    #print(list_data(read_data('data.txt')))
                     data = list_data(read_data('data.txt'))
                     _keys = {0 : "Имя", 1:'Фамилия',2:'Отчество',3:"Номер телефона:"}
                     print(_keys[key])
-                    find_data(data, key)
+                    data_c = cut_data(data, key)
+                    _str = (input('введите поисковый запрос:'))
+                    find_flag = [True  if _str in x else False for x in data_c]
+                    print("Имя\tФамилия\tОтчест\tТелефон")
+                    for i in range(len(data)):
+                        if find_flag[i]:
+                            print('\t'.join(data[i]))
+                                                           
     return "Bye"
 
 
@@ -32,7 +39,7 @@ def write_contact( contact ):
                 
 def read_line():
     """Функция принимает контакт от пользователя
-    и формирует его в словарь"""
+    и формирует его в список"""
     print("Введите данные: ")
     _fir_n = input('Имя:')
     _sec_n = input('Фамилия:')
@@ -41,7 +48,7 @@ def read_line():
     contact = [_fir_n, _sec_n, _fam_n ,_phone ]
     return contact
 
-def find_data( in_data , k):
+def cut_data( in_data , k):
     """Ф-я принимает базу контактов и изменят её
     поисковым запросом"""
     out_data = []
