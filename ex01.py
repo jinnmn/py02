@@ -2,19 +2,19 @@ def main_funct():
     print("ДОБРО ПОЖАЛОВАТЬ В ТЕЛ СПРАВОЧНИК!")
     menu = 1
     while menu != 0:
-        print("ВЫБЕРИТЕ КОМАНДУ:\n 0 -- ЗАКОНЧИТЬ РАБОТУ\n 1 -- СОЗДАТЬ НОВЫЙ КОНТАКТ\n 2 -- НАЙТИ КОНТАКТ")
+        print("ВЫБЕРИТЕ КОМАНДУ:\n 0 -- ЗАКОНЧИТЬ РАБОТУ\n 1 -- СОЗДАТЬ НОВЫЙ КОНТАКТ\n 2 -- НАЙТИ КОНТАКТ\n 3 -- ПРИНЯТЬ ФАЙЛ")
         menu = int(input())
         if menu == 1:
             write_contact(read_line())
         elif menu == 2:
             key = 0
             while key != 5: 
-                print("Критерий поиска?:\n 5 - назад\n 0 - Имя\n 1 - Фамилия\n 2 - Отчество\n 3 - Телефон\n 4 - Все")
+                print("Критерий поиска?:\n 5 - Nазад\n 0 - Имя\n 1 - Фамилия\n 2 - Отчество\n 3 - Телефон\n 4 - Все")
                 key = int(input())
                 if key == 4:
                     print("Имя\tФамилия\tОтчест\tТелефон")
                     print(read_data('data.txt'))
-                elif key in [1, 2, 3, 0]:
+                elif key in [1, 2, 3, 0,]:
                     #print(list_data(read_data('data.txt')))
                     data = list_data(read_data('data.txt'))
                     _keys = {0 : "Имя", 1:'Фамилия',2:'Отчество',3:"Номер телефона:"}
@@ -26,13 +26,27 @@ def main_funct():
                     for i in range(len(data)):
                         if find_flag[i]:
                             print('\t'.join(data[i]))
-                                                           
+                input('...')
+        elif menu == 3:
+             merge_menu()
     return "Bye"
-def merge_contact():
-    return
+
+
+def merge_menu():
+    menu = 1
+    file_name = input('Введите файл:/')
+    try:
+        with open(file_name, 'r', encoding="utf-8") as f:
+            _file_str = f.read()
+        _data = list_data(read_data(file_name))
+        print('Файл:')
+        input('...')
+    except:
+        print('Ошибка')
+     
 
 def write_contact( contact ):
-    """Функция принимает словарь и записывает его в файл
+    """Функция принимает контакт и записывает его в файл
     data.txt"""
     _string = '\t'.join(contact)    
     with open('data.txt', 'a', encoding="utf-8") as f:
@@ -68,8 +82,7 @@ def read_data( file ):
 
 
 def list_data( income_data ):
-    """Ф-я принимает базу контактов и изменят её
-    поисковым запросом"""
+    """Ф-я принимает базу контактов """
     _data = list(income_data.split())
     _data[0] = _data[0][1:]         # отрезаем служебный символ в начале файла(толи из-за utf-8 толи ещё почему)
     count = 0
