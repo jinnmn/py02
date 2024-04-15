@@ -15,7 +15,6 @@ def main_funct():
                     print("Имя\tФамилия\tОтчест\tТелефон")
                     print(read_data('data.txt'))
                 elif key in [1, 2, 3, 0,]:
-                    #print(list_data(read_data('data.txt')))
                     data = list_data(read_data('data.txt'))
                     _keys = {0 : "Имя", 1:'Фамилия',2:'Отчество',3:"Номер телефона:"}
                     print(_keys[key])
@@ -31,7 +30,7 @@ def main_funct():
              merge_menu()
     return "Bye"
 
-
+ 
 def merge_menu():
     menu = 1
     file_name = input('Введите файл:/')
@@ -39,12 +38,26 @@ def merge_menu():
         with open(file_name, 'r', encoding="utf-8") as f:
             _file_str = f.read()
         _data = list_data(read_data(file_name))
-        print('Файл:')
-        input('...')
+        print('Файл:\n',_file_str)
+        merge( _data  )
+        
     except:
         print('Ошибка')
-     
 
+
+
+def merge(new_data):
+    print(f'Обнаружено {len(new_data)} контактов')
+    _ind = input('Введите индексы контактов для добавления через пробел или all\n')
+    with open('data.txt', 'a', encoding="utf-8") as f:
+        print(*new_data)
+        if _ind == "all":
+            print(_ind)
+            for contact in new_data:
+                write_contact(contact)
+            print('!')    
+                
+       
 def write_contact( contact ):
     """Функция принимает контакт и записывает его в файл
     data.txt"""
@@ -74,7 +87,7 @@ def cut_data( in_data , k):
 
 def read_data( file ):
     """Функция читает принятый файл и возвращает
-    контакты списком словарей
+    контакты списком 
     """
     with open(file , 'r', encoding="utf-8") as f:
         _file_str = f.read()
