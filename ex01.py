@@ -54,13 +54,9 @@ def merge(new_data):
             _ind = [10**6]
         else:
             _ind = list(map(int, _ind.split()))            
-        print(_ind)
         for i in range(len(new_data)):
-            print(new_data[i], i)
             if i in _ind or _ind[0]== 10**6:
-                write_contact(new_data[i])
-                print('!')
-        print('!!!')    
+                write_contact(new_data[i])    
                 
        
 def write_contact( contact ):
