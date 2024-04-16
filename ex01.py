@@ -25,7 +25,7 @@ def main_funct():
                     for i in range(len(data)):
                         if find_flag[i]:
                             print('\t'.join(data[i]))
-                input('...')
+                if key != 5: input('...')
         elif menu == 3:
              merge_menu()
     return "Bye"
@@ -50,12 +50,17 @@ def merge(new_data):
     print(f'Обнаружено {len(new_data)} контактов')
     _ind = input('Введите индексы контактов для добавления через пробел или all\n')
     with open('data.txt', 'a', encoding="utf-8") as f:
-        print(*new_data)
         if _ind == "all":
-            print(_ind)
-            for contact in new_data:
-                write_contact(contact)
-            print('!')    
+            _ind = [10**6]
+        else:
+            _ind = list(map(int, _ind.split()))            
+        print(_ind)
+        for i in range(len(new_data)):
+            print(new_data[i], i)
+            if i in _ind or _ind[0]== 10**6:
+                write_contact(new_data[i])
+                print('!')
+        print('!!!')    
                 
        
 def write_contact( contact ):
